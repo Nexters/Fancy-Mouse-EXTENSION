@@ -13,5 +13,12 @@
   },
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches":["http://*/*","https://*/*"],
+      "js": ["content-script.js"],
+      "css": ["content.css"]
+    }
+  ]
 }
