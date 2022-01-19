@@ -6,7 +6,6 @@ onOffBtn.addEventListener('click', (e) => {
     chrome.action.enable();
   } else if (onOffBtn.innerHTML === "OFF") {
     onOffBtn.innerHTML = "ON"
-    console.log("disable 함수 실행");
     chrome.action.disable();
   }
 })
