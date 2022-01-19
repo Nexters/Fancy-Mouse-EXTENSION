@@ -1,0 +1,9 @@
+#hover-container {
+  width: 250px;
+  height: 400px;
+  background-color: gray;
+  position: fixed;
+  right: 0; 
+  top: 0;
+  z-index: 9999;
+}
