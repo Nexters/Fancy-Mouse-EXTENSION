@@ -9,3 +9,4 @@ onOffBtn.addEventListener('click', (e) => {
     chrome.action.disable();
   }
 })
+

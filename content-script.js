@@ -1,6 +1,6 @@
 const initHoverContainer = () => {
-  console.log("init")
   const hoverHTML = `
+<div id="selected-text-box"></div>
 <select name="folders" id="folders">
   <option value="toeic">Toeic</option>
   <option value="toss">Toss</option>
@@ -27,14 +27,34 @@ const getHoverContainer = () => {
   return document.getElementById("hover-container");
 }
 
-initHoverContainer();
+const showSelectedTextOnHover = (selectedText) => {
+  const selectedTextBox = document.getElementById("selected-text-box");
+  selectedTextBox.innerHTML = selectedText
+}
 
-document.addEventListener('mouseup', function(e) {
-  const selectedText = window.getSelection().toString();
-  const hoverContainer = getHoverContainer();
-  if (selectedText.length > 0) {
-    show(hoverContainer);
-  } else {
-    hide(hoverContainer);
-  }
-})
+const hideSelectedTextOnHover = () => {
+  const selectedTextBox = document.getElementById("selected-text-box");
+  selectedTextBox.innerHTML = "";
+}
+
+const showAndHideHoverEvent = () => {
+  document.addEventListener('mouseup', (e) => {
+    const selectedText = window.getSelection().toString();
+    const hoverContainer = getHoverContainer();
+    
+    if (selectedText.length > 0) {
+      show(hoverContainer);
+      showSelectedTextOnHover(selectedText);
+    } else if (selectedText.length === 0) {
+      hide(hoverContainer);
+      hideSelectedTextOnHover(selectedText);
+    }
+  })
+  
+  getHoverContainer().addEventListener('mouseup', (e) => {
+    e.stopPropagation();
+  })
+}
+
+initHoverContainer();
+showAndHideHoverEvent();
