@@ -36,6 +36,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 16px;
 }
 
 .placeholder {
@@ -44,4 +45,38 @@
   font-weight: normal;
   font-size: 16px;
   color: #C5C8CD;
+}
+
+#memo-container {
+  position: relative;
+}
+
+#memo {
+  width: 288px;
+  height: 80px;
+  border: 1px solid #E9EBEE;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 16px 16px 32px;
+  overflow: hidden;
+  resize: none;
+}
+
+#memo::placeholder {
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #C5C8CD;
+}
+
+#memo-length {
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #666F7B;
+  position: absolute;
+  right: 10px;
+  bottom: 15px;
 }

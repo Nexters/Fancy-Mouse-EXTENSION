@@ -11,7 +11,10 @@ const initHoverContainer = () => {
       </svg>
     </span>
   </div>
-  <textarea id="memo" rows="5" cols="33"></textarea>
+  <div id="memo-container">
+    <textarea placeholder="이 단어에 대한 메모를 적어주세요." id="memo" rows="5" cols="33"></textarea>
+    <span id="memo-length">0 / 140자</span>
+  </div>
   <button id="cancel-btn">취소</button>
   <button id="store-btn">저장</button>
   <button id="config-btn">설정</button>
@@ -70,6 +73,8 @@ const showAndHideHoverEvent = () => {
   })
 }
 
+
+
 const initHeadTag = () => {
   const link1 = document.createElement('link');
   link1.href = '//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css'
@@ -100,6 +105,20 @@ const initHeadTag = () => {
   document.head.appendChild(script);
 }
 
+
+const textareaKeyUpEvent = () => {
+  const textarea = document.getElementById('memo');
+  textarea.addEventListener('keyup', (e) => {
+    textarea.style.height = "1px";
+    textarea.style.height = (8 + textarea.scrollHeight) + "px";
+
+    const memoLength = document.getElementById('memo-length');
+    memoLength.innerHTML = textarea.value.length + ' / 140자'
+  });
+}
+
+
 initHoverContainer();
 initHeadTag();
 showAndHideHoverEvent();
+textareaKeyUpEvent();
