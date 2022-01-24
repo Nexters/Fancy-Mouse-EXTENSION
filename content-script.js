@@ -143,9 +143,15 @@ const dropdownClickEvent = () => {
   });
 }
 
+// const dropdownContentClickEvent = () => {
+//   const dropdownContent = document.getElementById('dropdown-contents');
+//   dropdownContent.addEventListener('click')
+// }
+
 initHoverContainer();
 initHeadTag();
 showAndHideHoverEvent();
 textareaKeyUpEvent();
 cancelBtnClickEvent();
 dropdownClickEvent();
+// dropdownContentClickEvent();
