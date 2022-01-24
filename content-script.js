@@ -3,13 +3,26 @@ const initHoverContainer = () => {
 <div id="selected-text-box"></div>
 <div id="selected-text-save-box">
   <div id="title">이 단어를 저장해보세요!</div>
-  <div id="folders">
-    <span class="placeholder" id="folders-text">저장할 폴더를 선택해주세요.</span>
-    <span id="folders-icon">
-      <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 1L7 7L13 1" stroke="#C5C8CD" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </span>
+  <div class="dropdown">
+    <div id="folders">
+      <span class="placeholder" id="folders-text">저장할 폴더를 선택해주세요.</span>
+      <span id="folders-icon">
+        <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L7 7L13 1" stroke="#C5C8CD" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </div>
+    <div id="dropdown-contents">
+      <div class="dropdown-content">
+        <div class="circle"></div><div>폴더명 01</div>
+      </div>
+      <div class="dropdown-content">
+        <div class="circle"></div><div>폴더명은 최대 열글자에요</div>
+      </div>
+      <div class="dropdown-content">
+        <div class="circle"></div><div>폴더명 03</div>
+      </div>
+    </div>
   </div>
   <div id="memo-container">
     <textarea placeholder="이 단어에 대한 메모를 적어주세요." id="memo" rows="5" cols="33"></textarea>
@@ -73,8 +86,6 @@ const showAndHideHoverEvent = () => {
   })
 }
 
-
-
 const initHeadTag = () => {
   const link1 = document.createElement('link');
   link1.href = '//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css'
@@ -120,8 +131,21 @@ const cancelBtnClickEvent = () => {
   })
 }
 
+const dropdownClickEvent = () => {
+  const folders = document.getElementById('folders');
+  folders.addEventListener('click', (e) => {
+    const dropdownContents = document.getElementById('dropdown-contents');
+    if (dropdownContents.style.display === "block") {
+      hideElement(dropdownContents);
+    } else {
+      showElement(dropdownContents);
+    }
+  });
+}
+
 initHoverContainer();
 initHeadTag();
 showAndHideHoverEvent();
 textareaKeyUpEvent();
 cancelBtnClickEvent();
+dropdownClickEvent();

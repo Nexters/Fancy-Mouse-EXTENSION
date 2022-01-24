@@ -36,7 +36,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+}
+
+#folders:hover {
+  cursor: pointer;
 }
 
 .placeholder {
@@ -51,6 +54,7 @@
   position: relative;
   width: 288px;
   height: 80px;
+  margin-top: 16px;
 }
 
 #memo {
@@ -133,3 +137,48 @@
   cursor: pointer;
 }
 
+#dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+#dropdown-contents {
+  display: none;
+  position: absolute;
+  width: 288px;
+  padding: 8px;
+  z-index: 1000;
+  box-shadow: 0px 10px 20px rgba(58, 69, 82, 0.1);
+  border-radius: 10px;
+  background: #FFFFFF;
+  box-sizing: border-box;
+}
+
+.dropdown-content {
+  width: 272px;
+  height: 52px;
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #3A4552;
+  padding-left: 16px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.dropdown-content:hover {
+  cursor: pointer;
+  background: #F7F8F9;
+  border-radius: 10px;
+}
+
+.circle {
+  width: 16px;
+  height: 16px;
+  background: #F767AC;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
