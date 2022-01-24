@@ -28,11 +28,11 @@ const initHoverContainer = () => {
   hoverContainer.style.display = "none";
 }
 
-const hide = (element) => {
+const hideElement = (element) => {
   element.style.display = "none";
 }
 
-const show = (element) => {
+const showElement = (element) => {
   element.style.display = "block";
 }
 
@@ -60,10 +60,10 @@ const showAndHideHoverEvent = () => {
     const hoverContainer = getHoverContainer();
     
     if (selectedText.length > 0) {
-      show(hoverContainer);
+      showElement(hoverContainer);
       showSelectedTextOnHover(selectedText);
     } else if (selectedText.length === 0) {
-      hide(hoverContainer);
+      hideElement(hoverContainer);
       hideSelectedTextOnHover(selectedText);
     }
   })
@@ -108,8 +108,20 @@ const textareaKeyUpEvent = () => {
   });
 }
 
+const cancelBtnClickEvent = () => {
+  const cancelBtn = document.getElementById('cancel-btn');
+  cancelBtn.addEventListener('click', (e) => {
+    const selectedText = window.getSelection().toString();
+    const hoverContainer = getHoverContainer();
+    const memo = document.getElementById('memo');
+    hideElement(hoverContainer);
+    hideSelectedTextOnHover(selectedText);
+    memo.value = "";
+  })
+}
 
 initHoverContainer();
 initHeadTag();
 showAndHideHoverEvent();
 textareaKeyUpEvent();
+cancelBtnClickEvent();
