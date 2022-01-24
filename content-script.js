@@ -153,7 +153,6 @@ const dropdownClickEvent = () => {
 
 const dropdownContentsClickEvent = () => {
   const dropdownContents = document.getElementById('dropdown-contents');
-  console.log(dropdownContents);
   dropdownContents.addEventListener('click', (e) => {
     const clickedDropdownContent = e.target.closest('.dropdown-content');
     const dropdownTextContainer = clickedDropdownContent.querySelector('.dropdown-text-container');
