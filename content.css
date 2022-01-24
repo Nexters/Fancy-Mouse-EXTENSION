@@ -1,6 +1,4 @@
 #hover-container {
-  /* width: 250px; */
-  /* height: 400px; */
   background-color: white;
   position: fixed;
   right: 0; 
@@ -9,6 +7,7 @@
 }
 
 #selected-text-save-box {
+  box-sizing: border-box;
   width: 320px;
   background-color: #FFFFFF;
   box-shadow: 0px 10px 40px rgba(58, 69, 82, 0.2);
@@ -17,6 +16,7 @@
 }
 
 #title {
+  width: 288px;
   font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
   font-style: normal;
   font-weight: bold;
@@ -49,9 +49,15 @@
 
 #memo-container {
   position: relative;
+  width: 288px;
+  height: 80px;
 }
 
 #memo {
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
   width: 288px;
   height: 80px;
   border: 1px solid #E9EBEE;
@@ -60,6 +66,8 @@
   padding: 16px 16px 32px;
   overflow: hidden;
   resize: none;
+  color: #3A4552;
+  background-color: white;
 }
 
 #memo::placeholder {
@@ -80,3 +88,40 @@
   right: 10px;
   bottom: 15px;
 }
+
+#btn-container {
+  display: flex;
+  justify-content: flex-end;
+  text-align: center;
+  height: 52px;
+  width: 288px;
+  margin-top: 16px;
+}
+
+#cancel-btn {
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  width: 62px;
+  height: 52px;
+  background: #F7F8F9;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #666F7B;
+  line-height: 52px;
+}
+
+#store-btn {
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  background: #C7BFF3;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: normal;
+  width: 91px;
+  height: 52px;
+  font-size: 16px;
+  color: #FFFFFF;
+  line-height: 52px;
+  margin-left: 8px;
+}
+

@@ -15,14 +15,14 @@ const initHoverContainer = () => {
     <textarea placeholder="이 단어에 대한 메모를 적어주세요." id="memo" rows="5" cols="33"></textarea>
     <span id="memo-length">0 / 140자</span>
   </div>
-  <button id="cancel-btn">취소</button>
-  <button id="store-btn">저장</button>
-  <button id="config-btn">설정</button>
-  <button id="voca-btn">단어장 전체보기</button>
+  <div id="btn-container">
+    <div id="cancel-btn">닫기</div>
+    <div id="store-btn">저장하기</div>
+  </div>
 </div>
 `
   const hoverContainer = document.createElement('div');
-  hoverContainer.setAttribute("id", "hover-container")
+  hoverContainer.setAttribute("id", "hover-container");
   hoverContainer.innerHTML = hoverHTML;
   document.body.appendChild(hoverContainer);
   hoverContainer.style.display = "none";
@@ -94,15 +94,6 @@ const initHeadTag = () => {
   link3.crossorigin = 'anonymous'
   link3.referrerpolicy = 'no-referrer'
   document.head.appendChild(link3);
-
-  const link4 = document.createElement('link');
-  link4.rel = 'stylesheet';
-  link4.href = 'https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css';
-  document.head.appendChild(link4);
-
-  const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js';
-  document.head.appendChild(script);
 }
 
 
