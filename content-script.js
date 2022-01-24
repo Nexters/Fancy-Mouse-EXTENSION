@@ -5,7 +5,9 @@ const initHoverContainer = () => {
   <div id="title">이 단어를 저장해보세요!</div>
   <div class="dropdown">
     <div id="folders">
-      <span class="placeholder" id="folders-text">저장할 폴더를 선택해주세요.</span>
+      <span class="placeholder" id="folders-text">
+        저장할 폴더를 선택해주세요.
+      </span>
       <span id="folders-icon">
         <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 1L7 7L13 1" stroke="#C5C8CD" stroke-width="2" stroke-linecap="round"/>
@@ -14,13 +16,19 @@ const initHoverContainer = () => {
     </div>
     <div id="dropdown-contents">
       <div class="dropdown-content">
-        <div class="circle"></div><div>폴더명 01</div>
+        <div class="dropdown-text-container">
+          <div class="circle"></div><div class="dropdown-text">폴더명 01</div>
+        </div>
       </div>
       <div class="dropdown-content">
-        <div class="circle"></div><div>폴더명은 최대 열글자에요</div>
+        <div class="dropdown-text-container">
+          <div class="circle"></div><div class="dropdown-text">폴더명은 최대 열글자에요</div>
+        </div>
       </div>
       <div class="dropdown-content">
-        <div class="circle"></div><div>폴더명 03</div>
+        <div class="dropdown-text-container">
+          <div class="circle"></div><div class="dropdown-text">폴더명 03</div>
+        </div>
       </div>
     </div>
   </div>
@@ -143,10 +151,17 @@ const dropdownClickEvent = () => {
   });
 }
 
-// const dropdownContentClickEvent = () => {
-//   const dropdownContent = document.getElementById('dropdown-contents');
-//   dropdownContent.addEventListener('click')
-// }
+const dropdownContentsClickEvent = () => {
+  const dropdownContents = document.getElementById('dropdown-contents');
+  console.log(dropdownContents);
+  dropdownContents.addEventListener('click', (e) => {
+    const clickedDropdownContent = e.target.closest('.dropdown-content');
+    const dropdownTextContainer = clickedDropdownContent.querySelector('.dropdown-text-container');
+    const folders = document.getElementById('folders');
+    document.getElementById('folders').replaceChild(dropdownTextContainer.cloneNode(true), folders.childNodes[1]);
+    hideElement(dropdownContents);
+  })
+}
 
 initHoverContainer();
 initHeadTag();
@@ -154,4 +169,4 @@ showAndHideHoverEvent();
 textareaKeyUpEvent();
 cancelBtnClickEvent();
 dropdownClickEvent();
-// dropdownContentClickEvent();
+dropdownContentsClickEvent();

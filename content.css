@@ -157,11 +157,6 @@
 .dropdown-content {
   width: 272px;
   height: 52px;
-  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  color: #3A4552;
   padding-left: 16px;
   padding-right: 16px;
   display: flex;
@@ -183,3 +178,17 @@
   display: inline-block;
   margin-right: 8px;
 }
+
+.dropdown-text-container {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-text {
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #3A4552;
+}
+
