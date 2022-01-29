@@ -1,12 +1,6 @@
-const onOffBtn = document.getElementById("onOffBtn");
+const container = document.getElementById("container");
 
-onOffBtn.addEventListener('click', (e) => {
-  if (onOffBtn.innerHTML === "ON") {
-    onOffBtn.innerHTML = "OFF"
-    chrome.action.enable();
-  } else if (onOffBtn.innerHTML === "OFF") {
-    onOffBtn.innerHTML = "ON"
-    chrome.action.disable();
-  }
-})
+container.addEventListener('click', (e) => {
+  console.log("컨테이너 클릭")
+});
 
