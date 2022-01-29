@@ -80,19 +80,21 @@ const hideSelectedTextOnHover = () => {
   selectedTextBox.innerHTML = "";
 }
 
+const showAndHideHover = (event) => {
+  const selectedText = window.getSelection().toString();
+  const hoverContainer = getHoverContainer();      
+  const blankPattern = /[\s]/g;
+  if (selectedText.length > 0 && !blankPattern.test(selectedText)) {
+    showElement(hoverContainer);
+    showSelectedTextOnHover(selectedText);
+  } else if (selectedText.length === 0) {
+    hideElement(hoverContainer);
+    hideSelectedTextOnHover(selectedText);
+  }
+}
+
 const showAndHideHoverEvent = () => {
-  document.addEventListener('mouseup', (e) => {
-    const selectedText = window.getSelection().toString();
-    const hoverContainer = getHoverContainer();      
-    const blankPattern = /[\s]/g;
-    if (selectedText.length > 0 && !blankPattern.test(selectedText)) {
-      showElement(hoverContainer);
-      showSelectedTextOnHover(selectedText);
-    } else if (selectedText.length === 0) {
-      hideElement(hoverContainer);
-      hideSelectedTextOnHover(selectedText);
-    }
-  })
+  document.addEventListener('mouseup', showAndHideHover)
   
   getHoverContainer().addEventListener('mouseup', (e) => {
     e.stopPropagation();
@@ -166,6 +168,18 @@ const dropdownContentsClickEvent = () => {
     hideElement(dropdownContents);
   })
 }
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(request);
+    if (request.message === 'OFF') {
+      document.removeEventListener('mouseup', showAndHideHover);
+    }
+    if (request.message === 'ON') {
+      document.addEventListener('mouseup', showAndHideHover);
+    }
+  }
+);
 
 initHoverContainer();
 initHeadTag();
