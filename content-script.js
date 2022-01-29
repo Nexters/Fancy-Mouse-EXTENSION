@@ -1,6 +1,11 @@
 const initHoverContainer = () => {
   const hoverHTML = `
-<div id="selected-text-box"></div>
+<div id="selcted-text-container">
+  <div id="selected-text-box"></div>
+  <div id="selected-text-description">
+    이 단어에 대한 설명이 단어에 대한 설명이 단어에 대한 설명이 단어에 대한 설명
+  </div>
+</div>
 <div id="selected-text-save-box">
   <div id="title">이 단어를 저장해보세요!</div>
   <div class="dropdown">
@@ -67,7 +72,7 @@ const getSelectedTextBox = () => {
 
 const showSelectedTextOnHover = (selectedText) => {
   const selectedTextBox = getSelectedTextBox();
-  selectedTextBox.innerHTML = selectedText
+  selectedTextBox.innerHTML = selectedText;
 }
 
 const hideSelectedTextOnHover = () => {
@@ -78,9 +83,9 @@ const hideSelectedTextOnHover = () => {
 const showAndHideHoverEvent = () => {
   document.addEventListener('mouseup', (e) => {
     const selectedText = window.getSelection().toString();
-    const hoverContainer = getHoverContainer();
-    
-    if (selectedText.length > 0) {
+    const hoverContainer = getHoverContainer();      
+    const blankPattern = /[\s]/g;
+    if (selectedText.length > 0 && !blankPattern.test(selectedText)) {
       showElement(hoverContainer);
       showSelectedTextOnHover(selectedText);
     } else if (selectedText.length === 0) {
