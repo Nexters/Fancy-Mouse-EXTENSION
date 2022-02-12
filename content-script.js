@@ -41,6 +41,7 @@ const initHoverContainer = () => {
     <textarea placeholder="이 단어에 대한 메모를 적어주세요." id="memo" rows="5" cols="33"></textarea>
     <span id="memo-length">0 / 140자</span>
   </div>
+  <button id="google-login2">구글 로그인2</button>
   <div id="btn-container">
     <div id="cancel-btn">닫기</div>
     <div id="store-btn">저장하기</div>
@@ -82,7 +83,7 @@ const hideSelectedTextOnHover = () => {
 
 const showAndHideHover = (event) => {
   const selectedText = window.getSelection().toString();
-  const hoverContainer = getHoverContainer();      
+  const hoverContainer = getHoverContainer();
   const blankPattern = /[\s]/g;
   if (selectedText.length > 0 && !blankPattern.test(selectedText)) {
     showElement(hoverContainer);
@@ -95,7 +96,7 @@ const showAndHideHover = (event) => {
 
 const showAndHideHoverEvent = () => {
   document.addEventListener('mouseup', showAndHideHover)
-  
+
   getHoverContainer().addEventListener('mouseup', (e) => {
     e.stopPropagation();
   })

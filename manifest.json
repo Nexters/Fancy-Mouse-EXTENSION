@@ -1,24 +1,32 @@
 {
-  "name": "Page Redder",
+  "name": "FancyMouse",
   "manifest_version": 3,
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "Turns the page red when you click the icon",
   "permissions": [
     "storage",
     "activeTab",
+    "identity",
     "scripting"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service-worker": "background.js"
   },
-  "action": {
+  "action" : {
     "default_popup": "popup.html"
   },
   "content_scripts": [
     {
       "matches":["http://*/*","https://*/*"],
-      "js": ["content-script.js"],
+      "js": ["content-script.js", "background.js"],
       "css": ["content.css"]
     }
-  ]
+  ],
+  "oauth2": {
+    "client_id": "306489567616-gf5d0pg1ms1cs6739dugbqo9365g94uk.apps.googleusercontent.com",
+    "scopes":[
+      "https://www.googleapis.com/auth/contacts.readonly",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
 }

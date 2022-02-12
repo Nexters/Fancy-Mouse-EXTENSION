@@ -34,3 +34,16 @@ chrome.storage.sync.get(['key'], (result) => {
     container.innerHTML = '지금은 ON인 상태';
   }
 });
+
+document.querySelector('#google-login').addEventListener(function () {
+  chrome.runtime.sendMessage({message: 'login'}, function (response) {
+
+  })
+});
+
+document.querySelector('#google-login2').addEventListener(function () {
+  chrome.runtime.sendMessage({message: 'isUserSignedIn'}, function (response) {
+
+  })
+})
+
