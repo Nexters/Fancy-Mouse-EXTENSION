@@ -1,9 +1,23 @@
+// 여기에 Rapid API의 키 값 넣어야 함!
+let rapidHost = 'aaaaaa'; 
+let rapidKey = 'bbbbbb'; 
+
 const initHoverContainer = () => {
   const hoverHTML = `
 <div id="selcted-text-container">
   <div id="selected-text-box"></div>
-  <div id="selected-text-description">
-    이 단어에 대한 설명이 단어에 대한 설명이 단어에 대한 설명이 단어에 대한 설명
+  <div id="dictionary-container">
+    <div id="selected-text-meaning">
+    </div>
+    <div id="selected-text-ipa">
+      <span id="ipa">발음</span><span id="ipa-text"></span>
+    </div>
+    <div id="selected-text-example">
+      <span id="example">예문</span><span id="example-text"></span>
+    </div>
+    <div id="selected-text-synonym">
+      <span id="synonym">동의어</span><span id="synonym-text"></span>
+    </div>
   </div>
 </div>
 <div id="selected-text-save-box">
@@ -82,11 +96,56 @@ const hideSelectedTextOnHover = () => {
 
 const showAndHideHover = (event) => {
   const selectedText = window.getSelection().toString();
-  const hoverContainer = getHoverContainer();      
+  const hoverContainer = getHoverContainer();
   const blankPattern = /[\s]/g;
   if (selectedText.length > 0 && !blankPattern.test(selectedText)) {
     showElement(hoverContainer);
     showSelectedTextOnHover(selectedText);
+
+    fetch(`https://twinword-word-graph-dictionary.p.rapidapi.com/definition_kr/?entry=${selectedText}`, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': rapidHost,
+        'x-rapidapi-key': rapidKey
+      }
+    }).then((res) => {
+      return res.json();
+    }).then((res) => {
+      if (res.ipa) {
+        document.getElementById('ipa-text').innerHTML = res.ipa;
+      }
+      if (res.meaning) {
+        document.getElementById('selected-text-meaning').innerHTML = res.meaning.korean;
+      }
+    })
+
+    fetch(`https://twinword-word-graph-dictionary.p.rapidapi.com/example/?entry=${selectedText}`, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': rapidHost,
+        'x-rapidapi-key': rapidKey
+      }
+    }).then((res) => {
+      return res.json();
+    }).then((res) => {
+      if (res.example) {
+        document.getElementById('example-text').innerHTML = res.example[0];
+      }
+    })
+
+    fetch(`https://twinword-word-graph-dictionary.p.rapidapi.com/association/?entry=${selectedText}`, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': rapidHost,
+        'x-rapidapi-key': rapidKey
+      }
+    }).then((res) => {
+      return res.json();
+    }).then((res) => {
+      if (res.assoc_word) {
+        document.getElementById('synonym-text').innerHTML = res.assoc_word.join(", ");
+      }
+    })
   } else if (selectedText.length === 0) {
     hideElement(hoverContainer);
     hideSelectedTextOnHover(selectedText);

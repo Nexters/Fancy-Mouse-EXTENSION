@@ -220,3 +220,68 @@
   width: 312px;
   color: #3A4552;
 }
+
+#ipa {
+  color: #72C0FD;
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  padding-right: 4px;
+}
+
+#example {
+  color: #91A6FC;
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  padding-right: 4px;
+}
+
+#synonym {
+  color: #B196FD;
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  padding-right: 4px;
+}
+
+#dictionary-container {
+  box-sizing: border-box;
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  padding: 16px;
+  font-size: 14px;
+  width: 312px;
+  height: 176px;
+  background: #F9FBFD;
+  border-radius: 10px;
+  color: #687280;
+}
+
+#selected-text-meaning {
+  color: #404B5A;
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  max-height: 200px;
+  overflow: scroll;
+}
+
+#selected-text-ipa {
+  line-height: 20px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+#selected-text-example {
+  line-height: 20px;
+  margin-bottom: 8px;
+}
+
+#selected-text-synonym {
+  line-height: 20px;
+  margin-bottom: 8px;
+}
