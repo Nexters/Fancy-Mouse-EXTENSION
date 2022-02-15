@@ -15,3 +15,18 @@ https://developer.chrome.com/docs/extensions/mv3/getstarted/
 ### `manifest.json`
 - 크롬 익스텐션에 대한 전반적인 설정을 하는 파일
 
+## How to use
+
+1. Clone the repo
+2. Fill all the details for Firebase App (Secrets) by replacing `<fill-me>` strings
+3. Find these <fill-me> details as explained above
+4. Run command `npm install` to install all node-modules / dependencies
+5. Run command `npm run build`
+6. This will build the `dist` folder
+7. Load your extension on Chrome following:
+   1. Access `chrome://extensions/`
+   2. Check `Developer mode`
+   3. Click on `Load unpacked` extension
+   4. Select the `dist` folder
+
+Note: `gitignore` will help ignore the `node_modules` and `dist` folder to be pushed to the github
