@@ -1,7 +1,7 @@
 // 여기에 Rapid API의 키 값 넣어야 함!
 
 let rapidHost = '<rapid-host>';
-let rapidKey = '<rapid-key></rapid-key>';
+let rapidKey = '<rapid-key>';
 
 const initHoverContainer = () => {
   const hoverHTML = `
