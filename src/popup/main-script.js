@@ -1,7 +1,7 @@
 // 여기에 Rapid API의 키 값 넣어야 함!
 
-let rapidHost = 'twinword-word-graph-dictionary.p.rapidapi.com';
-let rapidKey = '6b21a054a7msh7ea2cfa449543c0p16fedejsncf2942bb9599';
+let rapidHost = '<rapid-host>';
+let rapidKey = '<rapid-key></rapid-key>';
 
 const initHoverContainer = () => {
   const hoverHTML = `
