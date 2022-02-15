@@ -13,19 +13,19 @@ const setToChromeStorage = (value) => {
   });
 }
 
-container.addEventListener('click', (e) => {
-  chrome.storage.sync.get(['key'], (result) => {
-    if (result.key === 'ON') {
-      sendMessage({'message': 'ON'});
-      container.innerHTML = '지금은 ON인 상태'
-      setToChromeStorage('OFF');
-    } else if (result.key === 'OFF') {
-      sendMessage({'message': 'OFF'});
-      container.innerHTML = '지금은 OFF인 상태';
-      setToChromeStorage('ON');
-    }
-  });
-})
+// container.addEventListener('click', (e) => {
+//   chrome.storage.sync.get(['key'], (result) => {
+//     if (result.key === 'ON') {
+//       sendMessage({'message': 'ON'});
+//       container.innerHTML = '지금은 ON인 상태'
+//       setToChromeStorage('OFF');
+//     } else if (result.key === 'OFF') {
+//       sendMessage({'message': 'OFF'});
+//       container.innerHTML = '지금은 OFF인 상태';
+//       setToChromeStorage('ON');
+//     }
+//   });
+// })
 
 chrome.storage.sync.get(['key'], (result) => {
   if (result.key === 'ON') {

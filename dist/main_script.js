@@ -13347,6 +13347,77 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _firebase_config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firebase_config */ "./src/popup/firebase_config.js");
 /* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
+// 여기에 Rapid API의 키 값 넣어야 함!
+let rapidHost = 'twinword-word-graph-dictionary.p.rapidapi.com';
+let rapidKey = '6b21a054a7msh7ea2cfa449543c0p16fedejsncf2942bb9599';
+
+const initHoverContainer = () => {
+  const hoverHTML = `
+<div id="selcted-text-container">
+  <div id="selected-text-box"></div>
+  <div id="dictionary-container">
+    <div id="selected-text-meaning">
+    </div>
+    <div id="selected-text-ipa">
+      <span id="ipa">발음</span><span id="ipa-text"></span>
+    </div>
+    <div id="selected-text-example">
+      <span id="example">예문</span><span id="example-text"></span>
+    </div>
+    <div id="selected-text-synonym">
+      <span id="synonym">동의어</span><span id="synonym-text"></span>
+    </div>
+  </div>
+</div>
+<div id="selected-text-save-box">
+  <div id="title">이 단어를 저장해보세요!</div>
+  <div class="dropdown">
+    <div id="folders">
+      <span class="placeholder" id="folders-text">
+        저장할 폴더를 선택해주세요.
+      </span>
+      <span id="folders-icon">
+        <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L7 7L13 1" stroke="#C5C8CD" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </div>
+    <div id="dropdown-contents">
+      <div class="dropdown-content">
+        <div class="dropdown-text-container">
+          <div class="circle"></div><div class="dropdown-text">폴더명 01</div>
+        </div>
+      </div>
+      <div class="dropdown-content">
+        <div class="dropdown-text-container">
+          <div class="circle"></div><div class="dropdown-text">폴더명은 최대 열글자에요</div>
+        </div>
+      </div>
+      <div class="dropdown-content">
+        <div class="dropdown-text-container">
+          <div class="circle"></div><div class="dropdown-text">폴더명 03</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="memo-container">
+    <textarea placeholder="이 단어에 대한 메모를 적어주세요." id="memo" rows="5" cols="33"></textarea>
+    <span id="memo-length">0 / 140자</span>
+  </div>
+  <div id="btn-container">
+    <div id="cancel-btn">닫기</div>
+    <div id="store-btn">저장하기</div>
+  </div>
+</div>
+`
+  const hoverContainer = document.createElement('div');
+  hoverContainer.setAttribute("id", "hover-container");
+  hoverContainer.innerHTML = hoverHTML;
+  document.body.appendChild(hoverContainer);
+  hoverContainer.style.display = "none";
+}
+
+
 const hideElement = (element) => {
   element.style.display = "none";
 }
@@ -13390,6 +13461,7 @@ const showAndHideHover = (event) => {
     }).then((res) => {
       return res.json();
     }).then((res) => {
+      console.log(res);
       if (res.ipa) {
         document.getElementById('ipa-text').innerHTML = res.ipa;
       }
@@ -13519,6 +13591,7 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
+initHoverContainer();
 initHeadTag();
 showAndHideHoverEvent();
 textareaKeyUpEvent();
@@ -13543,10 +13616,10 @@ console.log("popup main!")
   }
 });
 
-document.querySelector('#sign_out').addEventListener('click', () => {
-  auth.signOut();
-  window.location.replace('./popup.html');
-});
+// document.querySelector('#sign_out').addEventListener('click', () => {
+//   auth.signOut();
+//   window.location.replace('./popup.html');
+// });
 
 // Initialize button with user's preferred color
 let changeColor = document.getElementById("changeColor");
@@ -13556,14 +13629,14 @@ chrome.storage.sync.get("color", ({ color }) => {
 });
 
 // When the button is clicked, inject setPageBackgroundColor into current page
-changeColor.addEventListener("click", async () => {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    function: setPageBackgroundColor,
-  });
-});
+// changeColor.addEventListener("click", async () => {
+//   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+//
+//   chrome.scripting.executeScript({
+//     target: { tabId: tab.id },
+//     function: setPageBackgroundColor,
+//   });
+// });
 
 // The body of this function will be executed as a content script inside the
 // current page
