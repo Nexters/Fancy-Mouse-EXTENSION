@@ -65,11 +65,11 @@ function init() {
 }
 init();
 
-document.querySelector('.btn__google').addEventListener('click', () => {
-  initFirebaseApp()
-});
+// document.querySelector('.btn__google').addEventListener('click', () => {
+//   initFirebaseApp()
+// });
 
-function initFirebaseApp() {
+export function initFirebaseApp() {
   // Detect auth state
   onAuthStateChanged(auth, user => {
     if (user != null) {
@@ -107,6 +107,8 @@ function startSignIn() {
  */
 function startAuth(interactive) {
   console.log("Auth trying")
+  console.log(chrome);
+  console.log(chrome.identity);
   chrome.identity.getAuthToken({ interactive: true }, function (token) {
     //Token:  This requests an OAuth token from the Chrome Identity API.
     if (chrome.runtime.lastError && !interactive) {
