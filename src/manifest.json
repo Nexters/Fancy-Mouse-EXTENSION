@@ -1,0 +1,39 @@
+{
+  "name": "FancyMouse",
+  "manifest_version": 3,
+  "version": "0.1",
+  "description": "Fancy Mouse Demo Chrome Extension",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "identity"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "main_script.js"
+      ],
+      "css": ["./src/css/content.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "./popup.html",
+    "default_title": "Getting Started Firebase + MV3!"
+  },
+  "options_page": "options.html",
+  "oauth2": {
+    "client_id": "<client_id>",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "<key>"
+}
