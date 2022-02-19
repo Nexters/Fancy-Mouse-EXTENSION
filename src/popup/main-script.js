@@ -248,6 +248,8 @@ const auth = getAuth(firebaseApp);
 
 console.log('popup main!');
 
+let folderList = [];
+
 document.getElementById('store-btn').addEventListener('click', () => {
   initFirebaseApp();
 });
@@ -265,8 +267,25 @@ onAuthStateChanged(auth, user => {
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log('request');
   console.log(request);
-  sendResponse({ result: "any response from background" });
-  return true;
+  console.log(request.folderList);
+  console.log(JSON.parse(request.folderList));
+  if (request && request.folderList && JSON.parse(request.folderList)) {
+    document.getElementById('dropdown-contents').innerHTML = '';
+    JSON.parse(request.folderList).map((el => {
+      document.getElementById('dropdown-contents').innerHTML += `
+        <div class="dropdown-content">
+          <div class="dropdown-text-container">
+            <div class="circle"></div><div class="dropdown-text">${el.folderName}</div>
+          </div>
+        </div>
+      `;
+    }));
+  }
+  // if(request && request.folderList && JSON.parse(request.folderList).length > 0) {
+  //   folderList = JSON.parse(request.folderList);
+  //   console.log(folderList);
+  // }
+  sendResponse({result: 'any response from main-script'});
 });
 
 // document.querySelector('#sign_out').addEventListener('click', () => {
