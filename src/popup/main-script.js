@@ -3,6 +3,11 @@
 let rapidHost = 'twinword-word-graph-dictionary.p.rapidapi.com';
 let rapidKey = '6b21a054a7msh7ea2cfa449543c0p16fedejsncf2942bb9599';
 
+let folderList = [];
+let uid = '';
+let selectedFolder = '';
+let word = {};
+
 const initHoverContainer = () => {
   const hoverHTML = `
 <div id="selcted-text-container">
@@ -112,7 +117,17 @@ const showAndHideHover = (event) => {
     }).then((res) => {
       return res.json();
     }).then((res) => {
+      console.log('res');
       console.log(res);
+      if(res) {
+        // word = {
+        //   wordId: 123
+        //   spelling: res?.entry || '';
+        //   meaning: [res?.meaning?.korean || ''];
+        //   createdAt: Date.now();
+        //   folderId: selectedFolder;
+        // }
+      }
       if (res.ipa) {
         document.getElementById('ipa-text').innerHTML = res.ipa;
       }
@@ -213,6 +228,9 @@ const dropdownContentsClickEvent = () => {
     const dropdownTextContainer = clickedDropdownContent.querySelector('.dropdown-text-container');
     const folders = document.getElementById('folders');
     document.getElementById('folders').replaceChild(dropdownTextContainer.cloneNode(true), folders.childNodes[1]);
+    // console.log(folders.childNodes[1]);
+    // console.log(folders.childNodes[1].childNodes[1]);
+    // console.log(folders.childNodes[1].childNodes[1].innerText);
     hideElement(dropdownContents);
   });
 };
@@ -242,16 +260,22 @@ import {
   getAuth,
   onAuthStateChanged
 } from 'firebase/auth';
+import { child, get, getDatabase, push, ref, set } from 'firebase/database';
 import {initFirebaseApp} from './popup';
 // Auth instance for the current firebaseApp
 const auth = getAuth(firebaseApp);
 
 console.log('popup main!');
 
-let folderList = [];
-
 document.getElementById('store-btn').addEventListener('click', () => {
-  initFirebaseApp();
+  // initFirebaseApp();
+
+  // TODO - 단어 저장 로직 추가
+  const db = getDatabase();
+  console.log('word')
+  console.log(word);
+  // set(ref(db, `users/${uid}/folders/${folderId}/wordList`), words);
+
 });
 
 onAuthStateChanged(auth, user => {
@@ -269,9 +293,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log(request);
   console.log(request.folderList);
   console.log(JSON.parse(request.folderList));
+  console.log(request.uid);
+  if(request && request.uid) {
+    uid = request.uid
+  }
   if (request && request.folderList && JSON.parse(request.folderList)) {
     document.getElementById('dropdown-contents').innerHTML = '';
-    JSON.parse(request.folderList).map((el => {
+    JSON.parse(request.folderList).map(((el,idx) => {
       document.getElementById('dropdown-contents').innerHTML += `
         <div class="dropdown-content">
           <div class="dropdown-text-container">
@@ -281,14 +309,5 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       `;
     }));
   }
-  // if(request && request.folderList && JSON.parse(request.folderList).length > 0) {
-  //   folderList = JSON.parse(request.folderList);
-  //   console.log(folderList);
-  // }
   sendResponse({result: 'any response from main-script'});
 });
-
-// document.querySelector('#sign_out').addEventListener('click', () => {
-//   auth.signOut();
-//   window.location.replace('./popup.html');
-// });

@@ -15,7 +15,8 @@
         "<all_urls>"
       ],
       "js": [
-        "main_script.js"
+        "main_script.js",
+        "popup.js"
       ],
       "css": ["./src/css/content.css"]
     }

@@ -15,7 +15,7 @@ const config = {
 
 // This creates firebaseApp instance
 // version: SDK 9
-const firebaseApp = initializeApp(config)
+const firebaseApp = initializeApp(config);
 
 export{
     firebaseApp

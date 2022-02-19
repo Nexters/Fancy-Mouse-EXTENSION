@@ -13,15 +13,6 @@ const setToChromeStorage = (value) => {
   });
 }
 
-// chrome.storage.sync.get(['key'], (result) => {
-//   if (result.key === 'ON') {
-//     container.innerHTML = '지금은 OFF인 상태';
-//   } else if (result.key === 'OFF') {
-//     container.innerHTML = '지금은 ON인 상태';
-//   }
-// });
-
-
 console.log('popup!');
 
 import {firebaseApp} from './firebase_config';
@@ -60,7 +51,7 @@ function init() {
       console.log(folderList);
 
       chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {folderList: JSON.stringify(folderList)}, function(response) {
+        chrome.tabs.sendMessage(tabs[0].id, {folderList: JSON.stringify(folderList), uid: user.uid}, function(response) {
           console.log(`message from background: ${JSON.stringify(response)}`);
         });
       });
