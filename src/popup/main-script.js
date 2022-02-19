@@ -1,7 +1,7 @@
 // 여기에 Rapid API의 키 값 넣어야 함!
 
-let rapidHost = '<rapid-host>';
-let rapidKey = '<rapid-key>';
+let rapidHost = 'twinword-word-graph-dictionary.p.rapidapi.com';
+let rapidKey = '6b21a054a7msh7ea2cfa449543c0p16fedejsncf2942bb9599';
 
 const initHoverContainer = () => {
   const hoverHTML = `
@@ -183,7 +183,6 @@ const initHeadTag = () => {
   document.head.appendChild(link3);
 };
 
-
 const textareaKeyUpEvent = () => {
   const textarea = document.getElementById('memo');
   textarea.addEventListener('keyup', (e) => {
@@ -194,18 +193,6 @@ const textareaKeyUpEvent = () => {
     memoLength.innerHTML = textarea.value.length + ' / 140자';
   });
 };
-
-// const cancelBtnClickEvent = () => {
-//   const cancelBtn = document.getElementById('cancel-btn');
-//   cancelBtn.addEventListener('click', (e) => {
-//     const selectedText = window.getSelection().toString();
-//     const hoverContainer = getHoverContainer();
-//     const memo = document.getElementById('memo');
-//     hideElement(hoverContainer);
-//     hideSelectedTextOnHover(selectedText);
-//     memo.value = "";
-//   })
-// }
 
 const dropdownClickEvent = () => {
   const folders = document.getElementById('folders');
@@ -279,28 +266,3 @@ onAuthStateChanged(auth, user => {
 //   auth.signOut();
 //   window.location.replace('./popup.html');
 // });
-
-// Initialize button with user's preferred color
-let changeColor = document.getElementById('changeColor');
-
-chrome.storage.sync.get('color', ({color}) => {
-  changeColor.style.backgroundColor = color;
-});
-
-// When the button is clicked, inject setPageBackgroundColor into current page
-// changeColor.addEventListener("click", async () => {
-//   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-//
-//   chrome.scripting.executeScript({
-//     target: { tabId: tab.id },
-//     function: setPageBackgroundColor,
-//   });
-// });
-
-// The body of this function will be executed as a content script inside the
-// current page
-function setPageBackgroundColor() {
-  chrome.storage.sync.get('color', ({color}) => {
-    document.body.style.backgroundColor = color;
-  });
-}
