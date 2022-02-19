@@ -1,3 +1,27 @@
+const container = document.getElementById("container");
+
+const sendMessage = (message) => {
+  chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
+    var activeTab = tabs[0];
+    chrome.tabs.sendMessage(activeTab.id, message);
+  });
+}
+
+const setToChromeStorage = (value) => {
+  chrome.storage.sync.set({'key': value}, () => {
+    console.log('Value is set to ' + value);
+  });
+}
+
+// chrome.storage.sync.get(['key'], (result) => {
+//   if (result.key === 'ON') {
+//     container.innerHTML = '지금은 OFF인 상태';
+//   } else if (result.key === 'OFF') {
+//     container.innerHTML = '지금은 ON인 상태';
+//   }
+// });
+
+
 console.log('popup!');
 
 import {firebaseApp} from './firebase_config';
@@ -10,6 +34,8 @@ import {
   browserLocalPersistence
 } from 'firebase/auth';
 
+import { child, get, getDatabase, push, ref, set } from 'firebase/database';
+
 // Auth instance for the current firebaseApp
 const auth = getAuth(firebaseApp);
 setPersistence(auth, browserLocalPersistence);
@@ -18,7 +44,7 @@ console.log(auth);
 
 function init() {
   // Detect auth state
-  onAuthStateChanged(auth, user => {
+  onAuthStateChanged(auth, async (user) => {
     console.log('user');
     console.log(user);
     if (user != null) {
@@ -27,7 +53,23 @@ function init() {
       // window.location.replace('./main.html');
       console.log('email', user.email);
       console.log('name', user.displayName);
+      document.getElementById('user-email').innerText = user.email;
+      document.getElementById('user-name').innerText = user.displayName;
       console.log('uid', user.uid);
+      const folderList = await getFolderList(user.uid);
+      console.log(folderList);
+
+      chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {folderList: JSON.stringify(folderList)}, function(response) {
+          console.log(`message from background: ${JSON.stringify(response)}`);
+        });
+      });
+      // const sending = chrome.runtime.sendMessage({
+      //   folderList: JSON.stringify(folderList)
+      // });
+      //
+      // sending.then(handleResponse, handleError);
+
     } else {
       console.log('No user logged in!');
     }
@@ -36,15 +78,17 @@ function init() {
 
 init();
 
-document.querySelector('.btn__google').addEventListener('click', () => {
-  console.log('click google login button');
-  initFirebaseApp();
-});
+if(document.querySelector('.btn__google')) {
+  document.querySelector('.btn__google').addEventListener('click', () => {
+    console.log('click google login button');
+    initFirebaseApp();
+  });
+}
 
-document.getElementById('google-login-button').addEventListener('click', () => {
-  console.log('click google login');
-  initFirebaseApp();
-});
+// document.getElementById('google-login-button').addEventListener('click', () => {
+//   console.log('click google login');
+//   initFirebaseApp();
+// });
 
 export function initFirebaseApp() {
   // Detect auth state
@@ -112,6 +156,11 @@ function startAuth(interactive) {
   });
 }
 
-function getFolderList (uid) {
-
+async function getFolderList (uid) {
+  const dbRef = ref(getDatabase());
+  const snapshot = await get(child(dbRef, `users/${uid}/folders`));
+  if (snapshot.exists()) {
+    return Object.values(snapshot.val());
+  }
+  return [];
 }
