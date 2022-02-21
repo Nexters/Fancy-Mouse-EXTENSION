@@ -12,7 +12,7 @@ module.exports = {
   entry: {
     firebase_config: './src/popup/firebase_config.js',
     popup: './src/popup/popup.js',
-    main_script: './src/popup/main-script.js',
+    main_script: './src/popup/main-script.js'
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
